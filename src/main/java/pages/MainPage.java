@@ -27,7 +27,7 @@ public class MainPage extends AbstractPage {
         waitForElement(modalFadeShowEffect, Duration.ofSeconds(10));
     }
 
-    public void closeTownModalWindow() {
+    public void confirmTownModalWindow() {
         LOGGER.info("Жду появление кнопки согласия выбора города");
         waitForElement(townSelectionAgreementButton, Duration.ofSeconds(10));
 
