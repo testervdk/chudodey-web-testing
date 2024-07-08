@@ -53,6 +53,7 @@ public abstract class AbstractPage {
             String updatedUrl = driver.getCurrentUrl();
 
             LOGGER.info("URL обновился");
+
             return updatedUrl;
         } catch (TimeoutException e) {
             LOGGER.error(e.getMessage());
