@@ -23,9 +23,7 @@ public class AddProductShoppingCartTest {
 
         mainPage.navigateToMainPage();
 
-        mainPage.waitTownModalWindow();
-
-        mainPage.confirmTownModalWindow();
+        mainPage.waitModalFadeShowEffectClose();
 
         brandPage = new BrandPage(driver);
 
