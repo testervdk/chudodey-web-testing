@@ -19,12 +19,12 @@ public class ProductPage extends AbstractPage {
     }
 
     public void clickProductButton() {
-        waitForElement(purchasingProductsButtons.getFirst(), Duration.ofSeconds(10));
+        waitForElementToDisplay(purchasingProductsButtons.getFirst(), Duration.ofSeconds(10));
         purchasingProductsButtons.getFirst().click();
     }
 
     public void waitProductAddedShoppingCart() {
-        waitForElement(addedProductsButton, Duration.ofSeconds(20));
+        waitForElementToDisplay(addedProductsButton, Duration.ofSeconds(20));
     }
 
     public boolean isProductAddedShoppingCart() {
