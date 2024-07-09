@@ -33,12 +33,30 @@ public abstract class AbstractPage {
         return driver.getCurrentUrl();
     }
 
-    protected void waitForElement(WebElement element, Duration timeout) {
+    protected void waitForElementToDisplay(WebElement element, Duration timeout) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeout);
             wait.until(ExpectedConditions.visibilityOf(element));
         } catch (Exception e) {
-            LOGGER.error("Элемент не был найден за отведенное время");
+            LOGGER.error("Элемент не был найден");
+        }
+    }
+
+    protected void waitForElementToDisappear(WebElement element, Duration timeout) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timeout);
+            wait.until(ExpectedConditions.invisibilityOfElementLocated((By) element));
+        } catch (Exception e) {
+            LOGGER.error("Элемент не исчез");
+        }
+    }
+
+    protected void waitForElementToBeClickable(WebElement element, Duration timeout) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timeout);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+        } catch (Exception e) {
+            LOGGER.error("Элемент не доступен для клика");
         }
     }
 
@@ -72,7 +90,7 @@ public abstract class AbstractPage {
     public void waitTownModalWindow() {
         try {
             LOGGER.info("Жду появление модального окна");
-            waitForElement(modalFadeShowEffect, Duration.ofSeconds(5));
+            waitForElementToDisplay(modalFadeShowEffect, Duration.ofSeconds(5));
         } catch (Exception e) {
             LOGGER.warn("Модальное окно не появилось");
         }
@@ -80,10 +98,23 @@ public abstract class AbstractPage {
 
     public void confirmTownModalWindow() {
         LOGGER.info("Жду появление кнопки согласия выбора города");
-        waitForElement(townSelectionAgreementButton, Duration.ofSeconds(10));
+        waitForElementToDisplay(townSelectionAgreementButton, Duration.ofSeconds(10));
 
         LOGGER.info("Кликаю на кнопку");
         townSelectionAgreementButton.click();
+    }
+
+    public void waitModalFadeShowEffectClose() {
+        waitForElementToDisplay(modalFadeShowEffect, Duration.ofSeconds(10));
+
+        hideModalWindow(modalFadeShowEffect);
+    }
+
+    public void hideModalWindow(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].style.display = 'none';", element);
+
+        js.executeScript("document.querySelector('.modal-backdrop').remove();");
     }
 
     public boolean isModalFadeShowEffectDisplayed() {
