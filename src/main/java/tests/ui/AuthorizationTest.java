@@ -3,9 +3,7 @@ package tests.ui;
 import driver.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.MainPage;
 
 public class AuthorizationTest {
@@ -14,7 +12,7 @@ public class AuthorizationTest {
     String userPassword = "123456";
     String expectedErrorMessage = "Неверная комбинация логина и пароля";
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         WebDriver driver = WebDriverSingleton.initDriver();
 
@@ -38,7 +36,7 @@ public class AuthorizationTest {
         Assert.assertTrue(mainPage.isUserDataWrong(expectedErrorMessage));
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         WebDriverSingleton.closeDriver();
     }

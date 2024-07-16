@@ -3,16 +3,14 @@ package tests.ui;
 import org.openqa.selenium.WebDriver;
 import driver.WebDriverSingleton;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.MainPage;
 
 public class GoToMainPageTest {
     private MainPage mainPage;
     private String expectedMainPageUrl = "https://chudodey.com/";
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         WebDriver driver = WebDriverSingleton.initDriver();
 
@@ -22,13 +20,12 @@ public class GoToMainPageTest {
     }
 
     @Test
-    public void test() {
+    public void goToMainPage() {
         Assert.assertEquals(mainPage.getPageUrl(), expectedMainPageUrl);
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         WebDriverSingleton.closeDriver();
     }
-
 }

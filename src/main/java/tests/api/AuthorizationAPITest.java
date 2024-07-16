@@ -2,19 +2,19 @@ package tests.api;
 
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import services.Auth;
+import services.APIServices;
 
-public class AuthAPITest {
-    private Auth authService;
+public class AuthorizationAPITest {
+    private APIServices authService;
 
     String userPhoneNumber = "+7 000 000 00 00";
     String userPassword = "123456";
 
-    @BeforeTest
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        authService = new Auth();
+        authService = new APIServices();
     }
 
     @Test
