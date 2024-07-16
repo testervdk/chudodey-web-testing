@@ -5,10 +5,10 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class Auth {
+public class APIServices {
     private static final String BASE_URL = "https://chudodey.com";
 
-    public Auth() {
+    public APIServices() {
         RestAssured.baseURI = BASE_URL;
     }
 
@@ -16,7 +16,21 @@ public class Auth {
         return given()
                 .formParam("AccountsDate[telephone]", phone)
                 .formParam("AccountsDate[password]", password)
-                .when()
                 .post("/accounts/authorization");
     }
+
+    public Response recoveryPasswordResponse(String phone) {
+        return given()
+                .formParam("AccountsDate[telephone]", phone)
+                .post("/accounts/get_flash_call_captcha_code/accounts-recovery_password");
+    }
+
+    public Response placeOrderWithoutRedirectResponse() {
+        return given()
+                .redirects().follow(false)
+                .get("/async_cart/steps/step2-address-delivery");
+    }
+
+
+
 }
