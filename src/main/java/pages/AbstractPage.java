@@ -42,15 +42,6 @@ public abstract class AbstractPage {
         }
     }
 
-    protected void waitForElementToDisappear(WebElement element, Duration timeout) {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, timeout);
-            wait.until(ExpectedConditions.invisibilityOfElementLocated((By) element));
-        } catch (Exception e) {
-            LOGGER.error("Элемент не исчез");
-        }
-    }
-
     protected void waitForElementToBeClickable(WebElement element, Duration timeout) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeout);
@@ -58,26 +49,6 @@ public abstract class AbstractPage {
         } catch (Exception e) {
             LOGGER.error("Элемент не доступен для клика");
         }
-    }
-
-    protected String waitForUrlChanged(Duration timeout) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        String currentUrl = (String) js.executeScript("return window.location.href;");
-
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, timeout);
-            wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(currentUrl)));
-
-            String updatedUrl = driver.getCurrentUrl();
-
-            LOGGER.info("URL обновился");
-
-            return updatedUrl;
-        } catch (TimeoutException e) {
-            LOGGER.error(e.getMessage());
-        }
-
-        return currentUrl;
     }
 
     public void waitForPageLoaded() {
@@ -97,17 +68,25 @@ public abstract class AbstractPage {
     }
 
     public void confirmTownModalWindow() {
-        LOGGER.info("Жду появление кнопки согласия выбора города");
-        waitForElementToDisplay(townSelectionAgreementButton, Duration.ofSeconds(10));
+        try {
+            LOGGER.info("Жду появление кнопки согласия выбора города");
+            waitForElementToDisplay(townSelectionAgreementButton, Duration.ofSeconds(5));
 
-        LOGGER.info("Кликаю на кнопку");
-        townSelectionAgreementButton.click();
+            LOGGER.info("Кликаю на кнопку");
+            townSelectionAgreementButton.click();
+        } catch (Exception e) {
+            LOGGER.warn("Кнопка согласия выбора города не появилась");
+        }
     }
 
     public void waitModalFadeShowEffectClose() {
-        waitForElementToDisplay(modalFadeShowEffect, Duration.ofSeconds(10));
+        try {
+            waitForElementToDisplay(modalFadeShowEffect, Duration.ofSeconds(5));
 
-        hideModalWindow(modalFadeShowEffect);
+            hideModalWindow(modalFadeShowEffect);
+        } catch (Exception e) {
+            LOGGER.info("Модальное окно не появилось");
+        }
     }
 
     public void hideModalWindow(WebElement element) {
