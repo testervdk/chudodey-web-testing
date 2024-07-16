@@ -30,7 +30,7 @@ public class MainPage extends AbstractPage {
     }
 
     public void clickLoginButton() {
-        waitForElementToBeClickable(loginButton, Duration.ofSeconds(10));
+        waitForElementToBeClickable(loginButton, Duration.ofSeconds(5));
 
         loginButton.click();
     }

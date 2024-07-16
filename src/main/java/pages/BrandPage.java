@@ -23,7 +23,7 @@ public class BrandPage extends AbstractPage {
     }
 
     public void clickBrandLink() {
-        waitForElementToDisplay(brandLinks.getFirst(), Duration.ofSeconds(15));
+        waitForElementToDisplay(brandLinks.getFirst(), Duration.ofSeconds(5));
 
         brandLinks.getFirst().click();
     }
