@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UI_TESTS">
+    <test name="Navigate">
+        <classes>
+            <class name="tests.ui.GoToMainPageTest"/>
+        </classes>
+    </test>
+    <test name="Settings">
+        <classes>
+            <class name="tests.ui.SelectTownWindowTest"/>
+        </classes>
+    </test>
+    <test name="UserActions">
+        <classes>
+            <class name="tests.ui.AuthorizationTest"/>
+            <class name="tests.ui.AddProductShoppingCartTest"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
