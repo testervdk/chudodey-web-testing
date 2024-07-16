@@ -3,15 +3,13 @@ package tests.ui;
 import driver.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.MainPage;
 
-public class CloseTownSelectionWindowTest {
+public class SelectTownWindowTest {
     private MainPage mainPage;
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         WebDriver driver = WebDriverSingleton.initDriver();
 
@@ -25,11 +23,11 @@ public class CloseTownSelectionWindowTest {
     }
 
     @Test
-    public void test() {
+    public void selectTownWindow() {
         Assert.assertFalse(mainPage.isModalFadeShowEffectDisplayed());
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         WebDriverSingleton.closeDriver();
     }
