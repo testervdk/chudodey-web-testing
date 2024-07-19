@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API_TESTS">
+    <test name="Authorization">
+        <classes>
+            <class name="tests.api.AuthorizationAPITest"/>
+            <class name="tests.api.RecoveryPasswordAPITest"/>
+        </classes>
+    </test>
+    <test name="Orders">
+        <classes>
+            <class name="tests.api.PlaceOrderTest"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
