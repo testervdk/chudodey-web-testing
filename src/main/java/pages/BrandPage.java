@@ -22,12 +22,11 @@ public class BrandPage extends AbstractPage {
         super.navigateToPage(BRAND_PAGE_URL);
     }
 
-    public void clickBrandLink() {
+    public ProductPage clickBrandLink() {
         waitForElementToDisplay(brandLinks.getFirst(), Duration.ofSeconds(5));
 
         brandLinks.getFirst().click();
+
+        return new ProductPage(driver);
     }
-
-
-
 }
