@@ -4,7 +4,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Log;
@@ -51,13 +50,6 @@ public abstract class AbstractPage {
         }
     }
 
-    public void waitForPageLoaded() {
-        ExpectedCondition<Boolean> expectation = driver -> ((JavascriptExecutor) driver)
-                .executeScript("return document.readyState").toString().equals("complete");
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(expectation);
-    }
-
     public void waitTownModalWindow() {
         try {
             LOGGER.info("Жду появление модального окна");
@@ -99,8 +91,4 @@ public abstract class AbstractPage {
     public boolean isModalFadeShowEffectDisplayed() {
         return !modalFadeShowEffect.isDisplayed();
     }
-
-
-
-
 }

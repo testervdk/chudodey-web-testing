@@ -31,6 +31,4 @@ public class APIServices {
                 .get("/async_cart/steps/step2-address-delivery");
     }
 
-
-
 }

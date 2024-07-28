@@ -30,6 +30,4 @@ public class ProductPage extends AbstractPage {
     public boolean isProductAddedShoppingCart() {
         return addedProductsButton.isDisplayed();
     }
-
-
 }
