@@ -19,7 +19,7 @@ public class AddProductShoppingCartTest {
 
         brandPage.navigateToBrandPage();
 
-        brandPage.waitModalFadeShowEffectClose();
+        brandPage.waitTownModalWindowHide();
 
         productPage = brandPage.clickBrandLink();
 

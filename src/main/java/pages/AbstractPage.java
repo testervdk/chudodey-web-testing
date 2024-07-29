@@ -15,9 +15,11 @@ public abstract class AbstractPage {
     protected static final Logger LOGGER = Log.getLogger();
 
     @FindBy(css = ".modal.fade.show")
-    private static WebElement modalFadeShowEffect;
+    private static WebElement modalWindowSelectingCurrentTown;
     @FindBy(css = ".change-city-btn.btn.btn-outline-primary.d-none")
-    private static WebElement townSelectionAgreementButton;
+    private static WebElement townConfirmationButton;
+    @FindBy(css = ".top-menu__icon-city.choose-city-btn.text-uppercase")
+    private static WebElement currentTownButton;
 
     protected AbstractPage(WebDriver driver) {
         this.driver = driver;
@@ -52,43 +54,49 @@ public abstract class AbstractPage {
 
     public void waitTownModalWindow() {
         try {
-            LOGGER.info("Жду появление модального окна");
-            waitForElementToDisplay(modalFadeShowEffect, Duration.ofSeconds(5));
+            LOGGER.info("Жду появление модального окна с выбором города");
+            waitForElementToDisplay(modalWindowSelectingCurrentTown, Duration.ofSeconds(5));
         } catch (Exception e) {
             LOGGER.warn("Модальное окно не появилось");
         }
     }
 
-    public void confirmTownModalWindow() {
+    public void clickTownConfirmationButton() {
         try {
-            LOGGER.info("Жду появление кнопки согласия выбора города");
-            waitForElementToDisplay(townSelectionAgreementButton, Duration.ofSeconds(5));
+            LOGGER.info("Жду появление кнопки 'Да, верно'");
+            waitForElementToDisplay(townConfirmationButton, Duration.ofSeconds(5));
 
-            LOGGER.info("Кликаю на кнопку");
-            townSelectionAgreementButton.click();
+            LOGGER.info("Кликаю на кнопку 'Да, верно'");
+            townConfirmationButton.click();
         } catch (Exception e) {
-            LOGGER.warn("Кнопка согласия выбора города не появилась");
+            LOGGER.warn("Кнопка 'Да, верно' не появилась");
         }
     }
 
-    public void waitModalFadeShowEffectClose() {
+    public void waitTownModalWindowHide() {
         try {
-            waitForElementToDisplay(modalFadeShowEffect, Duration.ofSeconds(5));
+            waitForElementToDisplay(modalWindowSelectingCurrentTown, Duration.ofSeconds(5));
 
-            hideModalWindow(modalFadeShowEffect);
+            hideTownModalWindow(modalWindowSelectingCurrentTown);
         } catch (Exception e) {
             LOGGER.info("Модальное окно не появилось");
         }
     }
 
-    public void hideModalWindow(WebElement element) {
+    public void hideTownModalWindow(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].style.display = 'none';", element);
 
         js.executeScript("document.querySelector('.modal-backdrop').remove();");
     }
 
-    public boolean isModalFadeShowEffectDisplayed() {
-        return !modalFadeShowEffect.isDisplayed();
+    public boolean isTownModalWindowDisplayed() {
+        return modalWindowSelectingCurrentTown.isDisplayed();
+    }
+
+    public String getCurrentTownName() {
+        waitForElementToDisplay(currentTownButton, Duration.ofSeconds(3));
+        
+        return currentTownButton.getText();
     }
 }

@@ -8,9 +8,9 @@ import pages.MainPage;
 
 public class AuthorizationTest {
     private MainPage mainPage;
-    String userPhoneNumber = "+7 000 000 00 00";
-    String userPassword = "123456";
-    String expectedErrorMessage = "Неверная комбинация логина и пароля";
+    private final String USER_PHONE = "+7 000 000 00 00";
+    private final String USER_PASSWORD = "123456";
+    private final String EXPECTED_ERROR_MESSAGE = "Неверная комбинация логина и пароля";
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
@@ -20,20 +20,20 @@ public class AuthorizationTest {
 
         mainPage.navigateToMainPage();
 
-        mainPage.waitModalFadeShowEffectClose();
+        mainPage.waitTownModalWindowHide();
 
         mainPage.clickLoginButton();
 
-        mainPage.inputPhone(userPhoneNumber);
+        mainPage.inputPhone(USER_PHONE);
 
-        mainPage.inputPassword(userPassword);
+        mainPage.inputPassword(USER_PASSWORD);
 
         mainPage.clickAuthorizationButton();
     }
 
     @Test
     public void invalidAuthorization() {
-        Assert.assertTrue(mainPage.isUserDataWrong(expectedErrorMessage));
+        Assert.assertTrue(mainPage.isUserDataWrong(EXPECTED_ERROR_MESSAGE));
     }
 
     @AfterMethod(alwaysRun = true)

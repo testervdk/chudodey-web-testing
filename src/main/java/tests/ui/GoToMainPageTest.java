@@ -8,7 +8,7 @@ import pages.MainPage;
 
 public class GoToMainPageTest {
     private MainPage mainPage;
-    private String expectedMainPageUrl = "https://chudodey.com/";
+    private final String EXPECTED_MAIN_PAGE_URL = "https://chudodey.com/";
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
@@ -21,7 +21,7 @@ public class GoToMainPageTest {
 
     @Test
     public void goToMainPage() {
-        Assert.assertEquals(mainPage.getPageUrl(), expectedMainPageUrl);
+        Assert.assertEquals(mainPage.getPageUrl(), EXPECTED_MAIN_PAGE_URL);
     }
 
     @AfterMethod(alwaysRun = true)

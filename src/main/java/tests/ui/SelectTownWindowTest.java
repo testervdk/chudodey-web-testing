@@ -8,6 +8,7 @@ import pages.MainPage;
 
 public class SelectTownWindowTest {
     private MainPage mainPage;
+    private final String CURRENT_TOWN_NANE = "ВЛАДИВОСТОК";
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
@@ -19,12 +20,14 @@ public class SelectTownWindowTest {
 
         mainPage.waitTownModalWindow();
 
-        mainPage.confirmTownModalWindow();
+        mainPage.clickTownConfirmationButton();
     }
 
     @Test
     public void selectTownWindow() {
-        Assert.assertFalse(mainPage.isModalFadeShowEffectDisplayed());
+        Assert.assertTrue(mainPage.isTownModalWindowDisplayed());
+
+        Assert.assertEquals(mainPage.getCurrentTownName(), CURRENT_TOWN_NANE);
     }
 
     @AfterMethod(alwaysRun = true)
