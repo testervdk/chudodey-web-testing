@@ -9,8 +9,8 @@ import services.APIServices;
 public class AuthorizationAPITest {
     private APIServices authService;
 
-    String userPhoneNumber = "+7 000 000 00 00";
-    String userPassword = "123456";
+    private final String USER_PHONE = "+7 000 000 00 00";
+    private final String USER_PASSWORD = "123456";
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
@@ -19,7 +19,7 @@ public class AuthorizationAPITest {
 
     @Test
     public void invalidAuthorization() {
-        Response response = (authService.authorizationResponse(userPhoneNumber, userPassword));
+        Response response = (authService.authorizationResponse(USER_PHONE, USER_PASSWORD));
 
         Assert.assertEquals(200, response.getStatusCode());
         Assert.assertEquals("application/json", response.getContentType());

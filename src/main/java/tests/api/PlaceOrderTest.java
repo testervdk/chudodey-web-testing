@@ -9,7 +9,7 @@ import services.APIServices;
 
 public class PlaceOrderTest {
     private APIServices authService;
-    private String expectedUrl = "https://chudodey.com/accounts/order_login";
+    private final String EXPECTED_URL = "https://chudodey.com/accounts/order_login";
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
@@ -25,6 +25,6 @@ public class PlaceOrderTest {
         String locationHeader = headers.getValue("Location");
 
         Assert.assertEquals(302, response.getStatusCode());
-        Assert.assertEquals(locationHeader, expectedUrl);
+        Assert.assertEquals(locationHeader, EXPECTED_URL);
     }
 }

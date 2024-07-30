@@ -9,7 +9,7 @@ import services.APIServices;
 public class RecoveryPasswordAPITest {
     private APIServices recoveryPasswordService;
 
-    String userPhoneNumber = "+7 000 000 00 00";
+    private final String USER_PHONE = "+7 000 000 00 00";
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
@@ -18,7 +18,7 @@ public class RecoveryPasswordAPITest {
 
     @Test
     public void recoveryPassword() {
-        Response response = (recoveryPasswordService.recoveryPasswordResponse(userPhoneNumber));
+        Response response = (recoveryPasswordService.recoveryPasswordResponse(USER_PHONE));
 
         Assert.assertEquals(200, response.getStatusCode());
         Assert.assertEquals("application/json", response.getContentType());
